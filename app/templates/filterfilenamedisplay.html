@@ -1,0 +1,38 @@
+<html>
+
+    <head>
+        <title>File Storage</title>
+
+        <style>
+        body {background-color: #5b5b5b;}
+        body {color:white}
+        body{text-align: justify;}
+        div{text-align: center;}
+        div{font-size: large;}
+        div{font-weight: bold;}
+        div {color:white}
+        </style>
+
+    </head>
+    <body>
+      <h1>File Storage System</h1>
+      <div class="event-list">
+        <ul>
+
+          <form method = "post" action = "/filenamedisplay">
+          {% for file in files %}
+          <input type="radio" name="_id" value= {{file._id}}>{{ file.filename }}<br>
+
+          {% endfor %}
+        </ul>
+
+              <input type = "submit" value = "submit"/></input>
+      </div>
+
+
+
+
+      </form>
+
+    </body>
+</html>

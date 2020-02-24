@@ -1,0 +1,92 @@
+<html>
+
+    <head>
+        <title>File Storage</title>
+
+        <style>
+        body {background-color: #1b1b1b;}
+        body {color:white}
+        body{text-align: justify;}
+        body{vertical-align:top;}
+        div{text-align: center;}
+        div{font-size: large;}
+        div{font-weight: bold;}
+        div {color:white}
+
+
+
+        </style>
+
+    </head>
+    <body>
+      <h1>File Storage System</h1>
+      <div class="event-list">
+        <ul>
+          {% for file in files %}
+            <li>{{ file.clientname }} - {{ file.filename }} - {{ file.filelocation }} - {{ file.activity }} - {{ file.creationdate }} - {{ file.lawyername }}</li>
+
+              <!-- - <button><a href="/deleteindiv">delete this file</a></button> <br> -->
+          {% endfor %}
+        </ul>
+        <button><a href="/deleteform">delete a file or files</a></button> <br>
+
+        <button><a href="/delete">clear all current files</a></button> <br>
+
+
+
+      </div>
+
+
+<!--––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––-->
+      <form method = "post" action = "/results">
+        <p>input your client's name</p>
+        <input type = "text" name = "clientname"/>
+        <br>
+<!--––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––-->
+
+        <p>input your file name</p>
+        <input type = "text" name = "filename"/>
+        <br>
+<!--––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––-->
+
+        <p>input your file location</p>
+        <input type = "text" name = "filelocation"/>
+        <br>
+<!--––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––-->
+
+        <p>input if this is an active or inactive client</p>
+        <input type="radio" name="activity" value="active">active<br>
+        <input type="radio" name="activity" value="inactive">inactive<br>
+
+<!--––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––-->
+        <br>
+        <p>input the date the file was created</p>
+        <input type = "date" name = "creationdate"/>
+        <br>
+<!--––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––-->
+
+        <p>input the name of the lawyer assigned to the case</p>
+        <input type = "text" name = "lawyername"/>
+        <br>
+<!--––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––-->
+
+        <!-- need submit button -->
+      <input type = "submit" value = "submit"/>
+      </form>
+
+
+
+
+
+<!--––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––-->
+
+
+<button><a href="/filterclientname">filter by client name</a></button> <br>
+
+<button><a href="/filterfilename">filter by file name</a></button> <br>
+
+<button><a href="/filterdate">filter by creation date</a></button> <br>
+
+
+    </body>
+</html>
