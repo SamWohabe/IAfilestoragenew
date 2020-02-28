@@ -104,10 +104,11 @@ def filterclientname():
 def clientnamedisplay():
     collection = mongo.db.events
 
-# creates a variable known as user_info that is the answers to a form in my other route
     user_info=dict(request.form)
+    print("the user info is", user_info)
 
-
+    files = list(collection.find({'clientname':user_info['_id']}))
+    print(files)
 
     return render_template('filterclientnamedisplay.html', files=files)
 
@@ -126,11 +127,10 @@ def filenamedisplay():
     collection = mongo.db.events
 
     user_info=dict(request.form)
+    print("the user info is", user_info)
 
-    user_input=user_info["filename"]
-    files=list(collection.find({"filename": user_input}))
-
-
+    files = list(collection.find({'filename':user_info['_id']}))
+    print(files)
 
     return render_template('filterfilenamedisplay.html', files=files)
 
@@ -149,8 +149,11 @@ def filterdate():
 def creationdatedisplay():
     collection = mongo.db.events
 
-# creates a variable known as user_info that is the answers to a form in my other route
     user_info=dict(request.form)
+    print("the user info is", user_info)
+
+    files = list(collection.find({'creationdate':user_info['_id']}))
+    print(files)
 
 
 

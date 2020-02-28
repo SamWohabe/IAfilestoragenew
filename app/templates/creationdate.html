@@ -21,7 +21,7 @@
 
           <form method = "post" action = "/creationdatedisplay">
           {% for file in files %}
-          <input type="radio" name="_id" value= {{file._id}}>{{ file.creationdate }}<br>
+          <input type="radio" name="_id" value= {{file.creationdate}}>{{ file.creationdate }}<br>
 
           {% endfor %}
         </ul>

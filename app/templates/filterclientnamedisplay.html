@@ -16,23 +16,17 @@
     </head>
     <body>
       <h1>File Storage System</h1>
-      <div class="event-list">
-        <ul>
 
-          <form method = "post" action = "/clientnamedisplay">
-          {% for file in files %}
-          <input type="radio" name="_id" value= {{file._id}}>{{ file.clientname }}<br>
 
-          {% endfor %}
-        </ul>
-
-              <input type = "submit" value = "submit"/></input>
-      </div>
+      <ul>
+        {% for file in files %}
+          <li>{{ file.clientname }} - {{ file.filename }} - {{ file.filelocation }} - {{ file.activity }} - {{ file.creationdate }} - {{ file.lawyername }}</li>
+        {% endfor %}
+      </ul>
 
 
 
-
-      </form>
 
     </body>
+    <button><a href="/index">return to the homepage</a></button> <br>
 </html>

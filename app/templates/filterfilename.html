@@ -21,7 +21,7 @@
 
           <form method = "post" action = "/filenamedisplay">
           {% for file in files %}
-          <input type="radio" name="_id" value= {{file._id}}>{{ file.filename }}<br>
+          <input type="radio" name="_id" value= {{file.filename}}>{{ file.filename }}<br>
           {% endfor %}
         </ul>
 

@@ -4,7 +4,7 @@
         <title>File Storage</title>
 
         <style>
-        body {background-color: #1b1b1b;}
+        body {background-color: #606269;}
         body {color:white}
         body{text-align: justify;}
         body{vertical-align:top;}
@@ -28,11 +28,13 @@
               <!-- - <button><a href="/deleteindiv">delete this file</a></button> <br> -->
           {% endfor %}
         </ul>
-        <button><a href="/deleteform">delete a file or files</a></button> <br>
-
-        <button><a href="/delete">clear all current files</a></button> <br>
 
 
+        <button><a href="/filterclientname">filter by client name</a></button> <br>
+
+        <button><a href="/filterfilename">filter by file name</a></button> <br>
+
+        <button><a href="/filterdate">filter by creation date</a></button> <br>
 
       </div>
 
@@ -80,12 +82,10 @@
 
 <!--––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––-->
 
+<button><a href="/deleteform">delete a file or files</a></button> <br>
 
-<button><a href="/filterclientname">filter by client name</a></button> <br>
+<button><a href="/delete">clear all current files</a></button> <br>
 
-<button><a href="/filterfilename">filter by file name</a></button> <br>
-
-<button><a href="/filterdate">filter by creation date</a></button> <br>
 
 
     </body>
