@@ -35,7 +35,7 @@ def results():
     user_info = dict(request.form)
     print(user_info)
 
-
+# defining various pieces of information from the form
     clientname = user_info["clientname"]
     print("the client name is ", clientname)
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -67,9 +67,8 @@ def results():
     collection.insert({"clientname": clientname, "filename": filename, "filelocation": filelocation, "activity": activity, "creationdate": creationdate, "lawyername": lawyername})
 
 # ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-
+# adds this information to the index route
     return redirect('/index')
-
 
     collection = mongo.db.events
 
@@ -77,7 +76,7 @@ def results():
     return redirect('/index')
 
 # ---------------------------------------------------------------------------------------------------------------------
-
+# deletes all objects in your mongo database
 @app.route('/delete')
 def delete():
     collection = mongo.db.events
@@ -89,14 +88,52 @@ def delete():
 #                                           ^^^^^^^MVP^^^^^^^
 # {{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}
 
+# allows you to delete specific items in your mongo database
+@app.route('/deleteindiv', methods=['get', 'post'])
+def deleteindiv():
+    collection = mongo.db.events
 
-@app.route('/filterclientname', methods=['get', 'post'])
-def filterclientname():
+# creates a variable known as user_info that is the answers to a form in my other route
+    user_info=dict(request.form)
+
+    result = mongo.db.events.delete_one({'_id': ObjectId(user_info['_id'])})
+
+    return redirect('/index')
+
+# ---------------------------------------------------------------------------------------------------------------------
+# lets you choose which items to delete
+@app.route('/deleteform', methods=['get', 'post'])
+def deleteform():
+
     collection = mongo.db.events
     files = list(collection.find({}))
 
 
-    return render_template('filterclientname.html', files=files)
+    return render_template('index2.html', files=files)
+
+
+# {{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}
+#                                           ^^^^^^^stage 2^^^^^^^
+# {{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}
+
+# these next six routes allow you to filter by various specific filters
+
+@app.route('/filterclientname', methods=['get', 'post'])
+def filterclientname():
+    collection = mongo.db.events
+        # this chunk of code makes sure only one of each name is displayed. it can be found in every filter route.
+    files = list(collection.find({}))
+    clientlist=[]
+    finalfiles=[]
+    for x in files:
+        client=x["clientname"]
+        if client not in clientlist:
+            clientlist.append(client)
+            finalfiles.append(x)
+        else:
+            print("1")
+
+    return render_template('filterclientname.html', files=finalfiles)
 
 # ---------------------------------------------------------------------------------------------------------------------
 
@@ -117,9 +154,18 @@ def clientnamedisplay():
 def filterfilename():
     collection = mongo.db.events
     files = list(collection.find({}))
+    filelist=[]
+    finalfiles=[]
+    for x in files:
+        client=x["clientname"]
+        if client not in filelist:
+            filelist.append(client)
+            finalfiles.append(x)
+        else:
+            print("1")
 
+    return render_template('filterclientname.html', files=finalfiles)
 
-    return render_template('filterfilename.html', files=files)
 # ---------------------------------------------------------------------------------------------------------------------
 
 @app.route('/filenamedisplay', methods=['get', 'post'])
@@ -139,9 +185,17 @@ def filenamedisplay():
 def filterdate():
     collection = mongo.db.events
     files = list(collection.find({}))
+    dateslist=[]
+    finalfiles=[]
+    for x in files:
+        client=x["clientname"]
+        if client not in dateslist:
+            dateslist.append(client)
+            finalfiles.append(x)
+        else:
+            print("1")
 
-
-    return render_template('creationdate.html', files=files)
+    return render_template('filterclientname.html', files=finalfiles)
 
 # ---------------------------------------------------------------------------------------------------------------------
 
@@ -159,26 +213,6 @@ def creationdatedisplay():
 
     return render_template('creationdatedisplay.html', files=files)
 
-# ---------------------------------------------------------------------------------------------------------------------
-
-@app.route('/deleteindiv', methods=['get', 'post'])
-def deleteindiv():
-    collection = mongo.db.events
-
-# creates a variable known as user_info that is the answers to a form in my other route
-    user_info=dict(request.form)
-
-    result = mongo.db.events.delete_one({'_id': ObjectId(user_info['_id'])})
-
-    return redirect('/index')
-
-# ---------------------------------------------------------------------------------------------------------------------
-
-@app.route('/deleteform', methods=['get', 'post'])
-def deleteform():
-
-    collection = mongo.db.events
-    files = list(collection.find({}))
-
-
-    return render_template('index2.html', files=files)
+# {{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}
+#                                           ^^^^^^^stage 3^^^^^^^
+# {{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}
